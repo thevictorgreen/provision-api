@@ -58,3 +58,20 @@ db.authorized_admins.save(
 ```bash
 db.authorized_admins.find({$text:{$search:"cool.guy"}})
 ```
+
+
+## NodeJS Notes
+
+###### Server Software Setup
+
+```bash
+npm install
+```
+
+###### Running
+```bash
+node index.js
+```
+
+###### Terminating
+Control + C
