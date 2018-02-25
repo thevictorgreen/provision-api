@@ -1,0 +1,66 @@
+{
+  "hostname":"server1.mydomain.com",
+  "mac_addr":"BLANK",
+  "serial_number":"abcde-0001",
+  "make_model":{
+    "make":"dell",
+    "model":"power edge 2400"
+  },
+  "property_custodian":"BLANK",
+  "cd_number":"BLANK",
+  "property_owner":"BLANK",
+  "branch":"BLANK",
+  "division":"BLANK",
+  "point_of_contact":"BLANK",
+  "project":"BLANK",
+  "machine_use":"BLANK",
+  "initial_software":[
+    "spacewalk",
+    "puppet-agent",
+    "ipa-client",
+    "sensu"
+  ],
+  "property_custodian_tasks":{
+    "property_custodian":false,
+    "cd_number":false,
+    "property_owner":false,
+    "branch":false,
+    "division":false
+  },
+  "property_owner_tasks":{
+    "point_of_contact":false
+  },
+  "point_of_contact_tasks":{
+    "project":false,
+    "use":false,
+    "initial_software_selected":false
+  },
+  "it_tasks":{
+    "unboxed":false,
+    "added_to_inventory":false,
+    "has_initial_config":false,
+    "has_available_rack":false,
+    "has_available_pdu":false,
+    "moved_to_datacenter":false,
+    "initial_software_installed":false
+  },
+  "network_tasks":{
+    "configured_port":false
+  },
+  "maintenance_tasks":{
+    "has_available_power":false
+  },
+  "provisioning_status":"PHASE1",
+  "tags":[
+    "abcde-0001",
+    "dell",
+    "power edge 2400"
+  ],
+  "provisioning_log":[
+    {
+      "task":"record created",
+      "completed_by": "victor.green",
+      "completed_date":"1519599285"
+    }
+  ]
+}

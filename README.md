@@ -53,6 +53,11 @@ db.authorized_admins.save(
 # Refer to the corresponding *schema.json document for info
 ```
 
+###### Import data
+```bash
+mongoimport --db provisioning --collection machines --file machines-sample.json
+```
+
 ###### Use
 
 ```bash
