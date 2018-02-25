@@ -37,7 +37,7 @@ db.software.ensureIndex({tags:"text"})
 ###### Insert data
 
 ```bash
-db.machines.save(
+db.authorized_admins.save(
  {
    "cac_id":"12345",
    "username":"cool.guy",
@@ -50,10 +50,11 @@ db.machines.save(
 )
 
 # Include _id to update existing document
+# Refer to the corresponding *schema.json document for info
 ```
 
 ###### Use
 
 ```bash
-db.machines.find({$text:{$search:"hostname"}})
+db.authorized_admins.find({$text:{$search:"cool.guy"}})
 ```
