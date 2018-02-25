@@ -33,7 +33,7 @@ db.authorized_admins.ensureIndex({tags:"text"})
 db.software.ensureIndex({tags:"text"})
 ```
 
-Use
+###### Use
 
 ```bash
 db.machines.find({$text:{$search:"hostname"}})
