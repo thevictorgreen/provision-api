@@ -1,5 +1,9 @@
 {
   "cac_id":"",
   "username":"",
-  "password":""
+  "password":"",
+  "tags":[
+    "cac_id",
+    "username"
+  ]
 }

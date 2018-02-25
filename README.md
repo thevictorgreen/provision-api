@@ -13,6 +13,8 @@ show databases
 
 use provisioning
 
+show collections
+
 db.createCollection("machines")
 
 db.createCollection("authorized_admins")
@@ -29,4 +31,10 @@ db.machines.ensureIndex({tags:"text"})
 db.authorized_admins.ensureIndex({tags:"text"})
 
 db.software.ensureIndex({tags:"text"})
+```
+
+Use
+
+```bash
+db.machines.find({$text:{$search:"hostname"}})
 ```

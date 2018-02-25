@@ -1,0 +1,13 @@
+{
+  "name":"",
+  "package_name":"",
+  "version":"",
+  "repository":"",
+  "installation_type":"",
+  "available":false,
+  "tags":[
+    "name",
+    "package_name",
+    "installation_type"
+  ]
+}
