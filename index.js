@@ -1,71 +1,25 @@
-var restify = require('restify');
-var mongodb = require('mongodb').MongoClient;
-var url     = "mongodb://localhost:27017/provisioning";
+var restify  = require('restify');
+var mongodb  = require('mongodb').MongoClient;
+var url      = "mongodb://localhost:27017/provisioning";
 
-var server = restify.createServer();
-server.get('/machines', machinesFunction);
-server.get('/machines/:value', searchMachines);
+admins   = require('./admins');
+machines = require('./machines');
 
-function machinesFunction(req, res, next) {
-
-   res.setHeader('Content-Type', 'application/json');
-   res.setHeader('Access-Control-Allow-Origin', '*');
-   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With');
-
-   mongodb.connect(url, function(err,db) {
-
-       if (err) {
-           throw err;
-       }
-       else {
-           db.collection("machines").find().toArray(function(err,result){
-               if (err) {
-                   throw err;
-                   db.close();
-               }
-               else {
-                   res.json(result);
-                   console.log(result);
-                   db.close();
-               }
-           });
-       }
-   });
-   next();
-}
+var server  = restify.createServer();
+server.use(restify.plugins.bodyParser());
 
 
+server.post('/admins', admins.post);
+ server.get('/admins', admins.get);
+ server.get('/admins/:value', admins.getByValue);
+ server.put('/admins', admins.put);
+ server.del('/admins', admins.delete);
 
-function searchMachines(req, res, next) {
-
-   res.setHeader('Content-Type', 'application/json');
-   res.setHeader('Access-Control-Allow-Origin', '*');
-   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With');
-
-   host = req.params.value;
-   
-   mongodb.connect(url, function(err,db) {
-
-       if (err) {
-           throw err;
-       }
-       else {
-           var query = {$text:{$search: host}};
-           db.collection("machines").find(query).toArray(function(err,result){
-               if (err) {
-                   throw err;
-                   db.close();
-	       }
-               else {
-                   res.json(result);
-                   console.log(result);
-                   db.close();
-               }
-           });
-       }
-   });
-   next();
-}
+server.post('/machines', machines.post);
+ server.get('/machines', machines.get);
+ server.get('/machines/:value', machines.getByValue);
+ server.put('/machines', machines.put);
+ server.del('/machines', machines.delete);
 
 
 server.listen(3000, function() {

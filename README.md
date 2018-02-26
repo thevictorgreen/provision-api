@@ -53,7 +53,12 @@ db.authorized_admins.save(
 # Refer to the corresponding *schema.json document for info
 ```
 
-###### Import data
+###### Import data (scripted)
+```bash
+bash importdata.sh
+```
+
+###### Import data (manually)
 ```bash
 mongoimport --db provisioning --collection machines --file machines-sample.json
 ```
