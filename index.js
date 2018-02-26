@@ -2,12 +2,14 @@ var restify  = require('restify');
 var mongodb  = require('mongodb').MongoClient;
 var url      = "mongodb://localhost:27017/provisioning";
 
+tripleA  = require('./triplea');
 admins   = require('./admins');
 machines = require('./machines');
 
 var server  = restify.createServer();
 server.use(restify.plugins.bodyParser());
 
+server.post('/triplea', tripleA.post);
 
 server.post('/admins', admins.post);
  server.get('/admins', admins.get);
