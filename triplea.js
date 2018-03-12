@@ -10,8 +10,6 @@ function TripleAController() {
   that.post = function(req,res,next) {
 
     res.setHeader('Content-Type', 'application/json');
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With');
 
     var adminAccount = req.body.auth;
     var username = adminAccount.username;
@@ -26,17 +24,20 @@ function TripleAController() {
             db.collection("authorized_admins").find(query).toArray(function(err,result){
               if (err) {
                 throw err;
+                console.log( {"status":"ERROR"} );
                 res.json({"status":"error"});
                 db.close();
               }
               else {
                 //res.json(result);
                 if ( adminAccount.password === result[0].password) {
-                  res.json({"status":"ok"});
+                  console.log( {"status":"YOU MADE IT"} );
+                  res.json({"status":"SUCCESS"});
                 }
                 else {
-                  console.log(adminAccount.password + ":" + result[0].password);
-                  res.json({"status":"error"});
+                  //console.log(adminAccount.password + ":" + result[0].password);
+                  console.log( {"status":"BAD USERNAME PASSWORD COMBO"} );
+                  res.json({"status":"ERROR"});
                 }
                 db.close();
               }

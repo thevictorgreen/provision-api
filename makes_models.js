@@ -1,9 +1,10 @@
-function MachinesController() {
+function MakesModelsController() {
 
   var that = this;
   var mongodb = require('mongodb').MongoClient;
   var url     = "mongodb://localhost:27017/provisioning";
   var sha256  = require('sha256');
+
 
 
   // CREATE NEW ITEM
@@ -13,14 +14,14 @@ function MachinesController() {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With');
 
-    var machineRecord = req.body.machine;
+    var modelRecord = req.body.model;
 
     mongodb.connect(url, function(err,db) {
         if (err) {
             throw err;
         }
         else {
-            db.collection("machines").save( machineRecord, function(err,result){
+            db.collection("makes_models").save( modelRecord, function(err,result){
                 if (err) {
                     throw err;
                     res.json({"status":"error"});
@@ -28,7 +29,7 @@ function MachinesController() {
                 }
                 else {
                     res.json({"status":"ok"});
-                    console.log("Created Machine Record");
+                    console.log("Created Model Record");
                     db.close();
                 }
             });
@@ -51,7 +52,7 @@ function MachinesController() {
             throw err;
         }
         else {
-            db.collection("machines").find().toArray(function(err,result){
+            db.collection("makes_models").find().toArray(function(err,result){
                 if (err) {
                     throw err;
                     res.json({"status":"error"});
@@ -85,8 +86,8 @@ function MachinesController() {
             throw err;
         }
         else {
-          var query = {$text:{$search: value}};
-          db.collection("machines").find(query).toArray(function(err,result){
+          var query = {"make":value};
+          db.collection("makes_models").find(query).toArray(function(err,result){
             if (err) {
               throw err;
               res.json({"status":"error"});
@@ -106,6 +107,7 @@ function MachinesController() {
   };
 
 
+
   // UPDATE ITEM MATCHING THIS _id
   that.put = function(req,res,next) {
 
@@ -113,14 +115,14 @@ function MachinesController() {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With');
 
-    var machineRecord = req.body.machine;
+    var modelRecord = req.body.model;
 
     mongodb.connect(url, function(err,db) {
         if (err) {
             throw err;
         }
         else {
-            db.collection("machines").save( machineRecord, function(err,result){
+            db.collection("makes_models").save( modelRecord, function(err,result){
                 if (err) {
                     throw err;
                     res.json({"status":"error"});
@@ -128,7 +130,7 @@ function MachinesController() {
                 }
                 else {
                     res.json({"status":"ok"});
-                    console.log("Machine Updated");
+                    console.log("Model Updated");
                     db.close();
                 }
             });
@@ -145,15 +147,15 @@ function MachinesController() {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With');
 
-    var machineRecord = {};
-    machineRecord._id = req.params.value;
+    var modelRecord = {};
+    modelRecord._id = req.params.value;
 
     mongodb.connect(url, function(err,db) {
         if (err) {
             throw err;
         }
         else {
-            db.collection("machines").remove( machineRecord, function(err,result){
+            db.collection("makes_models").remove( modelRecord, function(err,result){
                 if (err) {
                     throw err;
                     res.json({"status":"error"});
@@ -161,7 +163,7 @@ function MachinesController() {
                 }
                 else {
                     res.json({"status":"ok"});
-                    console.log("Machine Record Removed");
+                    console.log("Model Record Removed");
                     db.close();
                 }
             });
@@ -170,5 +172,7 @@ function MachinesController() {
     next();
   };
 
+
+
 };
-module.exports = new MachinesController();
+module.exports = new MakesModelsController();
